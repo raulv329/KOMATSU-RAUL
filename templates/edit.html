@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% block content %}
+<form method="post">
+    <label for="name">Nome:</label>
+    <input type="text" name="name" value="{{ item[1] }}" required>
+    <label for="description">Descrição:</label>
+    <textarea name="description">{{ item[2] }}</textarea>
+    <button type="submit">Salvar</button>
+</form>
+<a href="{{ url_for('index') }}">Voltar</a>
+{% endblock %}
