@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>Editar Cliente</h1>
+<form method="post" class="card p-3">
+    <div class="mb-3">
+        <label for="nome" class="form-label">Nome:</label>
+        <input type="text" name="nome" class="form-control" value="{{ cliente.Nome }}" required>
+    </div>
+    <div class="mb-3">
+        <label for="email" class="form-label">Email:</label>
+        <input type="email" name="email" class="form-control" value="{{ cliente.Email }}" required>
+    </div>
+    <div class="mb-3">
+        <label for="telefone" class="form-label">Telefone:</label>
+        <input type="text" name="telefone" class="form-control" value="{{ cliente.Telefone }}">
+    </div>
+    <div class="mb-3">
+        <label for="cpf" class="form-label">CPF:</label>
+        <input type="text" name="cpf" class="form-control" value="{{ cliente.CPF }}" required>
+    </div>
+    <div class="mb-3">
+        <label for="endereco" class="form-label">Endereço:</label>
+        <textarea name="endereco" class="form-control">{{ cliente.Endereco }}</textarea>
+    </div>
+    <button type="submit" class="btn btn-success">Salvar</button>
+    <a href="/clientes" class="btn btn-secondary">Cancelar</a>
+</form>
+{% endblock %}

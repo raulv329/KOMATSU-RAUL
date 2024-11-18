@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>Nova Associação de Cliente e Veículo</h1>
+<form method="post" class="card p-3">
+    <div class="mb-3">
+        <label for="cliente_id" class="form-label">Cliente:</label>
+        <select name="cliente_id" class="form-select" required>
+            {% for cliente in clientes %}
+            <option value="{{ cliente.Id }}">{{ cliente.Nome }}</option>
+            {% endfor %}
+        </select>
+    </div>
+    <div class="mb-3">
+        <label for="veiculo_id" class="form-label">Veículo:</label>
+        <select name="veiculo_id" class="form-select" required>
+            {% for veiculo in veiculos %}
+            <option value="{{ veiculo.Id }}">{{ veiculo.Marca }} {{ veiculo.Modelo }}</option>
+            {% endfor %}
+        </select>
+    </div>
+    <div class="mb-3">
+        <label for="status" class="form-label">Status:</label>
+        <input type="text" name="status" class="form-control" required>
+    </div>
+    <button type="submit" class="btn btn-success">Salvar</button>
+    <a href="/cliente_veiculos" class="btn btn-secondary">Cancelar</a>
+</form>
+{% endblock %}

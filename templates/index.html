@@ -1,27 +1,5 @@
 {% extends 'base.html' %}
 {% block content %}
-<a href="{{ url_for('create') }}" class="btn btn-primary mb-3">Criar Novo Item</a>
-<table class="table table-dark table-striped">
-    <thead class="table-dark">
-        <tr>
-            <th>ID</th>
-            <th>Nome</th>
-            <th>Descrição</th>
-            <th>Ações</th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for item in items %}
-        <tr>
-            <td>{{ item[0] }}</td>
-            <td>{{ item[1] }}</td>
-            <td>{{ item[2] }}</td>
-            <td>
-                <a href="{{ url_for('edit', item_id=item[0]) }}" class="btn btn-warning btn-sm">Editar</a>
-                <a href="{{ url_for('delete', item_id=item[0]) }}" class="btn btn-danger btn-sm">Excluir</a>
-            </td>
-        </tr>
-        {% endfor %}
-    </tbody>
-</table>
+<h1>Bem-vindo ao CRUD Flask</h1>
+<p>Use as opções acima para gerenciar clientes, veículos e associações.</p>
 {% endblock %}

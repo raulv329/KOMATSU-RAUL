@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>Associações</h1>
+<a href="/Clientes_Veiculos/create" class="btn btn-primary mb-3">Nova Associação</a>
+<table class="table table-bordered">
+    <thead class="table-dark">
+        <tr>
+            <th>ID</th>
+            <th>Cliente</th>
+            <th>Veículo</th>
+            <th>Status</th>
+            <th>Data</th>
+            <th>Ações</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for associacao in Clientes_Veiculos %}
+        <tr>
+            <td>{{ associacao.Id }}</td>
+            <td>{{ associacao.Nome }}</td>
+            <td>{{ associacao.Marca }} {{ associacao.Modelo }}</td>
+            <td>{{ associacao.Status }}</td>
+            <td>{{ associacao.DataRelacao }}</td>
+            <td>
+                <a href="/Clientes_Veiculos/delete/{{ associacao.Id }}" class="btn btn-danger btn-sm">Excluir</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

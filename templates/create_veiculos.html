@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>Criar Veículo</h1>
+<form method="post" class="card p-3">
+    <div class="mb-3">
+        <label for="marca" class="form-label">Marca:</label>
+        <input type="text" name="marca" class="form-control" required>
+    </div>
+    <div class="mb-3">
+        <label for="modelo" class="form-label">Modelo:</label>
+        <input type="text" name="modelo" class="form-control" required>
+    </div>
+    <div class="mb-3">
+        <label for="ano" class="form-label">Ano:</label>
+        <input type="number" name="ano" class="form-control" required>
+    </div>
+    <div class="mb-3">
+        <label for="cor" class="form-label">Cor:</label>
+        <input type="text" name="cor" class="form-control">
+    </div>
+    <div class="mb-3">
+        <label for="preco" class="form-label">Preço:</label>
+        <input type="number" name="preco" class="form-control">
+    </div>
+    <button type="submit" class="btn btn-success">Criar</button>
+    <a href="/veiculos" class="btn btn-secondary">Cancelar</a>
+</form>
+{% endblock %}

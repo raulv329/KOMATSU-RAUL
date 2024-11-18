@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>Veículos</h1>
+<a href="/veiculos/create" class="btn btn-primary mb-3">Novo Veículo</a>
+<table class="table table-bordered">
+    <thead class="table-dark">
+        <tr>
+            <th>ID</th>
+            <th>Marca</th>
+            <th>Modelo</th>
+            <th>Ano</th>
+            <th>Cor</th>
+            <th>Preço</th>
+            <th>Ações</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for veiculo in veiculos %}
+        <tr>
+            <td>{{ veiculo.Id }}</td>
+            <td>{{ veiculo.Marca }}</td>
+            <td>{{ veiculo.Modelo }}</td>
+            <td>{{ veiculo.Ano }}</td>
+            <td>{{ veiculo.Cor }}</td>
+            <td>{{ veiculo.Preco }}</td>
+            <td>
+                <a href="/veiculos/edit/{{ veiculo.Id }}" class="btn btn-warning btn-sm">Editar</a>
+                <a href="/veiculos/delete/{{ veiculo.Id }}" class="btn btn-danger btn-sm">Excluir</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

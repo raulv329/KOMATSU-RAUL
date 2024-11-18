@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>Criar Cliente</h1>
+<form method="post" class="card p-3">
+    <div class="mb-3">
+        <label for="nome" class="form-label">Nome:</label>
+        <input type="text" name="nome" class="form-control" required>
+    </div>
+    <div class="mb-3">
+        <label for="email" class="form-label">Email:</label>
+        <input type="email" name="email" class="form-control" required>
+    </div>
+    <div class="mb-3">
+        <label for="telefone" class="form-label">Telefone:</label>
+        <input type="text" name="telefone" class="form-control">
+    </div>
+    <div class="mb-3">
+        <label for="cpf" class="form-label">CPF:</label>
+        <input type="text" name="cpf" class="form-control" required>
+    </div>
+    <div class="mb-3">
+        <label for="endereco" class="form-label">Endereço:</label>
+        <textarea name="endereco" class="form-control"></textarea>
+    </div>
+    <button type="submit" class="btn btn-success">Criar</button>
+    <a href="/clientes" class="btn btn-secondary">Cancelar</a>
+</form>
+{% endblock %}
