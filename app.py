@@ -58,10 +58,10 @@ def ensure_database_and_tables():
     try:
         print("Conectando ao MySQL...")
         connection = pymysql.connect(
-            host=db_config["15.229.19.68"],
-            port=db_config["3306"],
-            user=db_config["root"],
-            password=db_config["@300870Sgt#"]
+            host=db_config["host"], 
+            port=db_config["port"],
+            user=db_config["user"],
+            password=db_config["password"]
         )
         print("Conexão bem-sucedida!")
         with connection.cursor() as cursor:
