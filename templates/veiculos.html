@@ -1,42 +1,41 @@
 {% extends 'base.html' %}
+
 {% block content %}
-<h1>Veículos</h1>
-<a href="/veiculos/create" class="btn btn-primary mb-3">Novo Veículo</a>
-<table class="table table-bordered">
-    <thead class="table-dark">
-        <tr>
-            <th>ID</th>
-            <th>Marca</th>
-            <th>Modelo</th>
-            <th>Ano</th>
-            <th>Cor</th>
-            <th>Preço</th>
-            <th>Ações</th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for veiculo in veiculos %}
-        <tr>
-            <td>{{ veiculo[0] }}</td>  <!-- id -->
-            <td>{{ veiculo[1] }}</td>  <!-- marca -->
-            <td>{{ veiculo[2] }}</td>  <!-- modelo -->
-            <td>{{ veiculo[3] }}</td>  <!-- ano -->
-            <td>{{ veiculo[4] }}</td>  <!-- cor -->
-            <td>{{ veiculo[5] }}</td>  <!-- preço -->
-            <td>
-                {% if veiculo.foto_url %}
-                <img src="{{ url_for('static', filename='images/' + veiculo.foto_url) }}" alt="Foto do Veículo">
-                {% else %}
-                    <span>Sem Foto</span>
-                {% endif %}
-            
-            </td>
-            <td>
-                <a href="{{ url_for('editar_veiculo', veiculo_id=veiculo[0]) }}" class="btn btn-warning btn-sm">Editar</a>
-                <a href="{{ url_for('deletar_veiculo', veiculo_id=veiculo[0]) }}" class="btn btn-danger btn-sm">Excluir</a>
-            </td>
-        </tr>
-        {% endfor %}
-    </tbody>
-</table>
+<h1 class="text-3xl font-semibold mb-4">Veículos</h1>
+<a href="/veiculos/create" class="bg-blue-500 text-white px-4 py-2 rounded-lg mb-4 inline-block">Novo Veículo</a>
+<div class="bg-white shadow-lg rounded-lg p-6">
+    <table class="min-w-full table-auto text-left border-collapse">
+        <thead>
+            <tr class="bg-gray-200">
+                <th class="px-4 py-2 text-sm font-medium">ID</th>
+                <th class="px-4 py-2 text-sm font-medium">Marca</th>
+                <th class="px-4 py-2 text-sm font-medium">Modelo</th>
+                <th class="px-4 py-2 text-sm font-medium">Ano</th>
+                <th class="px-4 py-2 text-sm font-medium">Cor</th>
+                <th class="px-4 py-2 text-sm font-medium">Preço</th>
+                <th class="px-4 py-2 text-sm font-medium">Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for veiculo in veiculos %}
+            <tr class="border-t">
+                <td class="px-4 py-2">{{ veiculo[0] }}</td>
+                <td class="px-4 py-2">{{ veiculo[1] }}</td>
+                <td class="px-4 py-2">{{ veiculo[2] }}</td>
+                <td class="px-4 py-2">{{ veiculo[3] }}</td>
+                <td class="px-4 py-2">{{ veiculo[4] }}</td>
+                <td class="px-4 py-2">{{ veiculo[5] }}</td>
+                <td class="px-4 py-2 space-x-2">
+                    <a href="{{ url_for('editar_veiculo', id=veiculo[0]) }}" class="bg-blue-500 text-white px-3 py-1 rounded-lg hover:bg-blue-600 transition">Editar</a>
+                    <a href="{{ url_for('excluir_veiculo', id=veiculo[0]) }}" class="bg-red-500 text-white px-3 py-1 rounded-lg hover:bg-red-600 transition">Excluir</a>                    
+                </td>
+            </tr>
+            {% else %}  
+            <tr>
+                <td colspan="7" class="text-center py-4 text-gray-500">Nenhum veículo encontrado.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>    
+</div>
 {% endblock %}

@@ -1,28 +1,36 @@
 {% extends 'base.html' %}
 {% block content %}
-<h1>Criar Cliente</h1>
-<form method="post" class="card p-3">
-    <div class="mb-3">
-        <label for="nome" class="form-label">Nome:</label>
-        <input type="text" name="nome" class="form-control" required>
+<h1 class="text-3xl font-semibold mb-6">Criar Cliente</h1>
+
+<form method="post" class="card p-6 shadow-md rounded-lg bg-white">
+    <div class="mb-4">
+        <label for="nome" class="block text-sm font-medium text-gray-700">Nome:</label>
+        <input type="text" name="nome" class="mt-2 block w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" required>
     </div>
-    <div class="mb-3">
-        <label for="email" class="form-label">Email:</label>
-        <input type="email" name="email" class="form-control" required>
+
+    <div class="mb-4">
+        <label for="email" class="block text-sm font-medium text-gray-700">Email:</label>
+        <input type="email" name="email" class="mt-2 block w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" required>
     </div>
-    <div class="mb-3">
-        <label for="telefone" class="form-label">Telefone:</label>
-        <input type="text" name="telefone" class="form-control">
+
+    <div class="mb-4">
+        <label for="telefone" class="block text-sm font-medium text-gray-700">Telefone:</label>
+        <input type="text" name="telefone" class="mt-2 block w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
     </div>
-    <div class="mb-3">
-        <label for="cpf" class="form-label">CPF:</label>
-        <input type="text" name="cpf" class="form-control" required>
+
+    <div class="mb-4">
+        <label for="cpf" class="block text-sm font-medium text-gray-700">CPF:</label>
+        <input type="text" name="cpf" class="mt-2 block w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" required>
     </div>
-    <div class="mb-3">
-        <label for="endereco" class="form-label">Endereço:</label>
-        <textarea name="endereco" class="form-control"></textarea>
+
+    <div class="mb-4">
+        <label for="endereco" class="block text-sm font-medium text-gray-700">Endereço:</label>
+        <textarea name="endereco" class="mt-2 block w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"></textarea>
     </div>
-    <button type="submit" class="btn btn-success">Criar</button>
-    <a href="/clientes" class="btn btn-secondary">Cancelar</a>
+
+    <div class="mt-4 space-x-4">
+        <button type="submit" class="bg-green-500 text-white px-6 py-3 rounded-lg hover:bg-green-600 transition duration-300">Criar</button>
+        <a href="/clientes" class="bg-gray-500 text-white px-6 py-3 rounded-lg hover:bg-gray-600 transition duration-300">Cancelar</a>
+    </div>
 </form>
 {% endblock %}

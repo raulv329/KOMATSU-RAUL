@@ -1,31 +1,39 @@
 {% extends 'base.html' %}
+
 {% block content %}
-<h1>Cliente - Veículos</h1>
-<a href="/cliente_veiculos/create" class="btn btn-primary mb-3">Nova Associação</a>
-<table class="table table-bordered">
-    <thead class="table-dark">
-        <tr>
-            <th>ID</th>
-            <th>Cliente</th>
-            <th>Veículo</th>
-            <th>Status</th>
-            <th>Data de Relação</th>
-            <th>Ações</th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for cliente_veiculo in cliente_veiculos %}
-        <tr>
-            <td>{{ cliente_veiculo.Id }}</td>
-            <td>{{ cliente_veiculo.Nome }}</td>
-            <td>{{ cliente_veiculo.Marca }} {{ cliente_veiculo.Modelo }}</td>
-            <td>{{ cliente_veiculo.Status }}</td>
-            <td>{{ cliente_veiculo.DataRelacao }}</td>
-            <td>
-                <a href="/cliente_veiculos/delete/{{ cliente_veiculo.Id }}" class="btn btn-danger btn-sm">Excluir</a>
-            </td>
-        </tr>
-        {% endfor %}
-    </tbody>
-</table>
+<h1 class="text-3xl font-semibold mb-6">Associações</h1>
+
+<a href="/cliente_veiculos/create" class="bg-blue-500 text-white px-6 py-3 rounded-lg mb-6 inline-block hover:bg-blue-600 transition duration-300">Nova Associação</a>
+
+<div class="overflow-x-auto">
+    <table class="min-w-full table-auto border-separate border-spacing-0">
+        <thead class="bg-gray-800 text-white">
+            <tr>
+                <th class="px-4 py-2 text-left text-sm font-medium">ID</th>
+                <th class="px-4 py-2 text-left text-sm font-medium">Cliente</th>
+                <th class="px-4 py-2 text-left text-sm font-medium">Veículo</th>
+                <th class="px-4 py-2 text-left text-sm font-medium">Status</th>
+                <th class="px-4 py-2 text-left text-sm font-medium">Data</th>
+                <th class="px-4 py-2 text-left text-sm font-medium">Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for associacao in Clientes_Veiculos %}
+            <tr class="border-t border-gray-200">
+                <td class="px-4 py-3 text-sm text-gray-800">{{ associacao[0] }}</td>
+                <td class="px-4 py-3 text-sm text-gray-800">{{ associacao[1] }}</td>
+                <td class="px-4 py-3 text-sm text-gray-800">{{ associacao[2] }} {{ associacao[3] }}</td>
+                <td class="px-4 py-3 text-sm text-gray-800">{{ associacao[4] }}</td>
+                <td class="px-4 py-3 text-sm text-gray-800">{{ associacao[5] }}</td>
+                <td class="px-4 py-3 text-sm text-gray-800">
+                    <form action="{{ url_for('excluir_cliente_veiculo', id=associacao[0]) }}" method="POST">
+                        <button type="submit" class="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600 transition duration-300">Excluir</button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
 {% endblock %}

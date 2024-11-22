@@ -1,34 +1,43 @@
 {% extends 'base.html' %}
+
 {% block content %}
-<h1>Clientes</h1>
-<a href="/clientes/create" class="btn btn-primary mb-3">Novo Cliente</a>
-<table class="table table-bordered">
-    <thead class="table-dark">
-        <tr>
-            <th>ID</th>
-            <th>Nome</th>
-            <th>Email</th>
-            <th>Telefone</th>
-            <th>CPF</th>
-            <th>Endereço</th>
-            <th>Ações</th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for cliente in clientes %}
-        <tr>
-            <td>{{ cliente.Id }}</td>
-            <td>{{ cliente.Nome }}</td>
-            <td>{{ cliente.Email }}</td>
-            <td>{{ cliente.Telefone }}</td>
-            <td>{{ cliente.CPF }}</td>
-            <td>{{ cliente.Endereco }}</td>
-            <td>
-                <a href="/clientes/edit/{{ cliente.Id }}" class="btn btn-warning btn-sm">Editar</a>
-                <a href="/clientes/delete/{{ cliente.Id }}" class="btn btn-danger btn-sm">Excluir</a>
-            </td>
-        </tr>
-        {% endfor %}
-    </tbody>
-</table>
+<h1 class="text-3xl font-semibold mb-4">Clientes</h1>
+<a href="/clientes/create" class="bg-blue-500 text-white px-4 py-2 rounded-lg mb-4 inline-block hover:bg-blue-600 transition">Novo Cliente</a>
+
+<div class="overflow-x-auto">
+    <table class="min-w-full table-auto border-collapse">
+        <thead class="bg-blue-100">
+            <tr>
+                <th class="px-4 py-2 text-left text-sm font-medium text-gray-600">ID</th>
+                <th class="px-4 py-2 text-left text-sm font-medium text-gray-600">Nome</th>
+                <th class="px-4 py-2 text-left text-sm font-medium text-gray-600">Email</th>
+                <th class="px-4 py-2 text-left text-sm font-medium text-gray-600">Telefone</th>
+                <th class="px-4 py-2 text-left text-sm font-medium text-gray-600">CPF</th>
+                <th class="px-4 py-2 text-left text-sm font-medium text-gray-600">Endereço</th>
+                <th class="px-4 py-2 text-left text-sm font-medium text-gray-600">Ações</th>  <!-- Nova coluna para as ações -->
+            </tr>
+        </thead>
+        <tbody>
+            {% for cliente in clientes %}
+            <tr class="border-t">
+                <td class="px-4 py-2 text-sm text-gray-800">{{ cliente[0] }}</td>
+                <td class="px-4 py-2 text-sm text-gray-800">{{ cliente[1] }}</td>
+                <td class="px-4 py-2 text-sm text-gray-800">{{ cliente[2] }}</td>
+                <td class="px-4 py-2 text-sm text-gray-800">{{ cliente[3] }}</td>
+                <td class="px-4 py-2 text-sm text-gray-800">{{ cliente[4] }}</td>
+                <td class="px-4 py-2 text-sm text-gray-800">{{ cliente[5] }}</td>                
+                <td class="px-4 py-2 space-x-2 flex"> <!-- Alterado para flex -->
+                    <a href="/clientes/edit/{{ cliente[0] }}" class="bg-blue-500 text-white px-3 py-1 rounded-lg hover:bg-blue-600 transition">Editar</a>
+                    <a href="/clientes/delete/{{ cliente[0] }}" class="bg-red-500 text-white px-3 py-1 rounded-lg hover:bg-red-600 transition">Excluir</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<div class="text-center mt-6">
+    <a href="{{ url_for('index') }}" class="bg-gray-500 text-white px-4 py-2 rounded-lg hover:bg-gray-600 transition">Voltar</a>
+</div>
+
 {% endblock %}

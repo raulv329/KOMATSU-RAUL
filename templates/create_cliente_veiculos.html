@@ -1,28 +1,35 @@
 {% extends 'base.html' %}
 {% block content %}
-<h1>Nova Associação de Cliente e Veículo</h1>
-<form method="post" class="card p-3">
-    <div class="mb-3">
-        <label for="cliente_id" class="form-label">Cliente:</label>
-        <select name="cliente_id" class="form-select" required>
+<h1 class="text-3xl font-semibold mb-6">Nova Associação de Cliente e Veículo</h1>
+
+<form action="{{ url_for('criar_cliente_veiculo') }}" method="POST" class="mt-4 space-y-6">
+    <div class="mb-4">
+        <label for="cliente_id" class="block text-sm font-medium text-gray-700">Cliente</label>
+        <select id="cliente_id" name="cliente_id" class="form-select mt-2 block w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" required>
             {% for cliente in clientes %}
-            <option value="{{ cliente.Id }}">{{ cliente.Nome }}</option>
+            <option value="{{ cliente[0] }}">{{ cliente[1] }}</option>
             {% endfor %}
         </select>
     </div>
-    <div class="mb-3">
-        <label for="veiculo_id" class="form-label">Veículo:</label>
-        <select name="veiculo_id" class="form-select" required>
+
+    <div class="mb-4">
+        <label for="veiculo_id" class="block text-sm font-medium text-gray-700">Veículo</label>
+        <select id="veiculo_id" name="veiculo_id" class="form-select mt-2 block w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" required>
             {% for veiculo in veiculos %}
-            <option value="{{ veiculo.Id }}">{{ veiculo.Marca }} {{ veiculo.Modelo }}</option>
+            <option value="{{ veiculo[0] }}">{{ veiculo[1] }} - {{ veiculo[2] }}</option>
             {% endfor %}
         </select>
     </div>
-    <div class="mb-3">
-        <label for="status" class="form-label">Status:</label>
-        <input type="text" name="status" class="form-control" required>
+
+    <div class="mb-4">
+        <label for="status" class="block text-sm font-medium text-gray-700">Status</label>
+        <input type="text" id="status" name="status" class="mt-2 block w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Status da associação" required>
     </div>
-    <button type="submit" class="btn btn-success">Salvar</button>
-    <a href="/cliente_veiculos" class="btn btn-secondary">Cancelar</a>
+
+    <div class="space-x-4">
+        <button type="submit" class="bg-green-500 text-white px-6 py-3 rounded-lg hover:bg-green-600 transition duration-300">Salvar</button>
+        <a href="{{ url_for('listar_cliente_veiculos') }}" class="bg-gray-500 text-white px-6 py-3 rounded-lg hover:bg-gray-600 transition duration-300">Cancelar</a>
+    </div>
 </form>
+
 {% endblock %}

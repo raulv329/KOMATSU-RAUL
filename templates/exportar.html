@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container mt-5">
+    <h1>Exportar Dados</h1>
+    <form action="{{ url_for('exportar_dados') }}" method="POST">
+        <div class="mb-3">
+            <label for="tipo_dado" class="form-label">Selecione o tipo de dados para exportar:</label>
+            <select id="tipo_dado" name="tipo_dado" class="form-select" required>
+                <option value="clientes">Clientes</option>
+                <option value="veiculos">Veículos</option>
+                <option value="associacoes">Associações (Clientes e Veículos)</option>
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary">Exportar</button>
+    </form>
+    <a href="{{ url_for('index') }}" class="btn btn-secondary mt-3">Voltar</a>
+
+</div>
+
+{% endblock %}
