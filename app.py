@@ -106,6 +106,65 @@ def listar_clientes():
     conn.close()
     return render_template('clientes.html', clientes=clientes)
 
+@app.route('/cliente_veiculos/create', methods=['GET', 'POST'])
+def criar_cliente_veiculo():
+    if request.method == 'POST':
+        cliente_id = request.form['cliente_id']
+        veiculo_id = request.form['veiculo_id']
+        status = request.form['status']
+        data_relacao = request.form['data_relacao']
+
+        # Conectar ao banco de dados
+        conn = get_db_connection()
+        cursor = conn.cursor()
+
+        # Inserir a nova associação no banco de dados
+        cursor.execute('''
+            INSERT INTO Cliente_Veiculos (ClienteId, VeiculoId, Status, DataRelacao)
+            VALUES (%s, %s, %s, %s)
+        ''', (cliente_id, veiculo_id, status, data_relacao))
+
+        # Confirmar e fechar a conexão
+        conn.commit()
+        conn.close()
+
+        # Redirecionar de volta para a página de listagem de associações
+        return redirect(url_for('listar_cliente_veiculos'))
+
+    # Caso o método seja GET, exibe o formulário para criar a associação
+    conn = get_db_connection()
+    cursor = conn.cursor()
+
+    # Recuperar clientes e veículos para preencher as opções no formulário
+    cursor.execute('SELECT id, nome FROM Clientes')
+    clientes = cursor.fetchall()
+
+    cursor.execute('SELECT id, marca, modelo FROM Veiculos')
+    veiculos = cursor.fetchall()
+
+    conn.close()
+
+    return render_template('create_cliente_veiculos.html', clientes=clientes, veiculos=veiculos)
+
+@app.route('/cliente_veiculos')
+def listar_cliente_veiculos():
+    conn = get_db_connection()
+    cursor = conn.cursor()
+    
+    cursor.execute('''
+        SELECT cv.Id, c.Nome, v.Marca, v.Modelo, cv.Status, cv.DataRelacao
+        FROM Cliente_Veiculos cv
+        JOIN Clientes c ON cv.ClienteId = c.Id
+        JOIN Veiculos v ON cv.VeiculoId = v.Id
+    ''')
+
+    associacoes = cursor.fetchall()
+    conn.close()
+
+    return render_template('cliente_veiculos.html', Clientes_Veiculos=associacoes)
+
+
+
 @app.route('/clientes/create', methods=['GET', 'POST'])
 def criar_cliente():
     if request.method == 'POST':
@@ -242,57 +301,16 @@ def listar_associacoes():
     conn = get_db_connection()
     cursor = conn.cursor()
 
-    # Executando a consulta para pegar as associações de veículos
     cursor.execute('''
         SELECT cv.Id, c.Nome, v.Marca, v.Modelo, cv.Status, cv.DataRelacao
         FROM Cliente_Veiculos cv
         JOIN Clientes c ON cv.ClienteId = c.Id
         JOIN Veiculos v ON cv.VeiculoId = v.Id
     ''')
-
-    associacoes = cursor.fetchall()  # Obtendo os dados da consulta
+    associacoes = cursor.fetchall()
     conn.close()
 
-    # Passando os dados para o template (Clientes_Veiculos agora recebe associacoes)
     return render_template('cliente_veiculos.html', Clientes_Veiculos=associacoes)
-
-
-@app.route('/cliente_veiculos/create', methods=['GET', 'POST'])
-def criar_cliente_veiculo():
-    conn = get_db_connection()
-    cursor = conn.cursor()
-    if request.method == 'POST':
-        cliente_id = request.form['cliente_id']
-        veiculo_id = request.form['veiculo_id']
-        status = request.form['status']
-        cursor.execute("INSERT INTO Cliente_Veiculos (ClienteId, VeiculoId, Status) VALUES (%s, %s, %s)",
-                       (cliente_id, veiculo_id, status))
-        conn.commit()
-        conn.close()
-        flash("Associação de Cliente e Veículo criada com sucesso!")
-        return redirect(url_for('listar_associacoes'))
-    
-    # Obter lista de clientes e veículos para o formulário
-    cursor.execute("SELECT Id, Nome FROM Clientes")
-    clientes = cursor.fetchall()
-    cursor.execute("SELECT Id, Marca, Modelo FROM Veiculos")
-    veiculos = cursor.fetchall()
-    conn.close()
-    return render_template('create_cliente_veiculos.html', clientes=clientes, veiculos=veiculos)
-
-@app.route('/cliente_veiculos/delete/<int:id>')
-def excluir_cliente_veiculo(id):
-    conn = get_db_connection()
-    cursor = conn.cursor()
-
-    # Executando a consulta para excluir a associação
-    cursor.execute('DELETE FROM Cliente_Veiculos WHERE Id = %s', (id,))
-    conn.commit()
-
-    conn.close()
-
-    # Redirecionando após a exclusão
-    return redirect(url_for('listar_associacoes'))
 
 
 # Importar dados

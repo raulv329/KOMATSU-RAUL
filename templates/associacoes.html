@@ -1,22 +1,44 @@
 {% extends 'base.html' %}
+
 {% block content %}
-<h1 class="text-3xl font-semibold mb-6">Associações</h1>
+<div class="max-w-2xl mx-auto p-6 bg-white shadow-lg rounded-lg">
+    <h1 class="text-3xl font-semibold mb-6 text-center">Criar Nova Associação</h1>
 
-<a href="/Clientes_Veiculos/create" class="bg-blue-500 text-white px-6 py-3 rounded-lg mb-6 inline-block hover:bg-blue-600 transition duration-300">Nova Associação</a>
+    <form method="post" class="space-y-4">
+        <div class="mb-4">
+            <label for="cliente_id" class="block text-lg font-medium text-gray-700">Cliente:</label>
+            <select name="cliente_id" id="cliente_id" class="mt-2 p-2 w-full border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500" required>
+                <option value="">Selecione um cliente</option>
+                {% for cliente in clientes %}
+                    <option value="{{ cliente[0] }}">{{ cliente[1] }}</option>
+                {% endfor %}
+            </select>
+        </div>
 
-<div class="overflow-x-auto">
-    <table class="min-w-full table-auto border-separate border-spacing-0">
-        <thead class="bg-gray-800 text-white">
-            <tr>
-                <th class="px-4 py-2 text-left text-sm font-medium">ID</th>
-                <th class="px-4 py-2 text-left text-sm font-medium">Cliente</th>
-                <th class="px-4 py-2 text-left text-sm font-medium">Veículo</th>
-                <th class="px-4 py-2 text-left text-sm font-medium">Status</th>
-                <th class="px-4 py-2 text-left text-sm font-medium">Data</th>
-                <th class="px-4 py-2 text-left text-sm font-medium">Ações</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for associacao in Clientes_Veiculos %}
-            <tr class="border-t border-gray-200">
-                <td cl
+        <div class="mb-4">
+            <label for="veiculo_id" class="block text-lg font-medium text-gray-700">Veículo:</label>
+            <select name="veiculo_id" id="veiculo_id" class="mt-2 p-2 w-full border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500" required>
+                <option value="">Selecione um veículo</option>
+                {% for veiculo in veiculos %}
+                    <option value="{{ veiculo[0] }}">{{ veiculo[1] }} - {{ veiculo[2] }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div class="mb-4">
+            <label for="status" class="block text-lg font-medium text-gray-700">Status:</label>
+            <input type="text" name="status" id="status" class="mt-2 p-2 w-full border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500" required>
+        </div>
+
+        <div class="mb-4">
+            <label for="data_relacao" class="block text-lg font-medium text-gray-700">Data da Relação:</label>
+            <input type="date" name="data_relacao" id="data_relacao" class="mt-2 p-2 w-full border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500" required>
+        </div>
+
+        <div class="flex justify-between items-center">
+            <button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded-md shadow-md hover:bg-blue-700 focus:outline-none">Criar Associação</button>
+            <a href="{{ url_for('listar_cliente_veiculos') }}" class="text-gray-600 hover:text-gray-800">Cancelar</a>
+        </div>
+    </form>
+</div>
+{% endblock %}

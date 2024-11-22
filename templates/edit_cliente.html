@@ -1,28 +1,30 @@
 {% extends 'base.html' %}
 {% block content %}
-<h1>Editar Cliente</h1>
-<form method="post" class="card p-3">
-    <div class="mb-3">
-        <label for="nome" class="form-label">Nome:</label>
-        <input type="text" name="nome" class="form-control" value="{{ cliente.Nome }}" required>
+<h1 class="text-2xl font-bold mb-6">Editar Cliente</h1>
+<form method="post" class="bg-white shadow-md rounded-lg p-6">
+    <div class="mb-4">
+        <label for="nome" class="block text-gray-700 text-sm font-medium mb-2">Nome:</label>
+        <input type="text" name="nome" id="nome" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400" value="{{ cliente.Nome }}" required>
     </div>
-    <div class="mb-3">
-        <label for="email" class="form-label">Email:</label>
-        <input type="email" name="email" class="form-control" value="{{ cliente.Email }}" required>
+    <div class="mb-4">
+        <label for="email" class="block text-gray-700 text-sm font-medium mb-2">Email:</label>
+        <input type="email" name="email" id="email" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400" value="{{ cliente.Email }}" required>
     </div>
-    <div class="mb-3">
-        <label for="telefone" class="form-label">Telefone:</label>
-        <input type="text" name="telefone" class="form-control" value="{{ cliente.Telefone }}">
+    <div class="mb-4">
+        <label for="telefone" class="block text-gray-700 text-sm font-medium mb-2">Telefone:</label>
+        <input type="text" name="telefone" id="telefone" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400" value="{{ cliente.Telefone }}">
     </div>
-    <div class="mb-3">
-        <label for="cpf" class="form-label">CPF:</label>
-        <input type="text" name="cpf" class="form-control" value="{{ cliente.CPF }}" required>
+    <div class="mb-4">
+        <label for="cpf" class="block text-gray-700 text-sm font-medium mb-2">CPF:</label>
+        <input type="text" name="cpf" id="cpf" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400" value="{{ cliente.CPF }}" required>
     </div>
-    <div class="mb-3">
-        <label for="endereco" class="form-label">Endereço:</label>
-        <textarea name="endereco" class="form-control">{{ cliente.Endereco }}</textarea>
+    <div class="mb-4">
+        <label for="endereco" class="block text-gray-700 text-sm font-medium mb-2">Endereço:</label>
+        <textarea name="endereco" id="endereco" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400">{{ cliente.Endereco }}</textarea>
     </div>
-    <button type="submit" class="btn btn-success">Salvar</button>
-    <a href="/clientes" class="btn btn-secondary">Cancelar</a>
+    <div class="flex items-center justify-between">
+        <button type="submit" class="bg-green-500 text-white font-medium py-2 px-4 rounded-lg hover:bg-green-600 transition duration-300">Salvar</button>
+        <a href="/clientes" class="bg-gray-300 text-gray-700 font-medium py-2 px-4 rounded-lg hover:bg-gray-400 transition duration-300">Cancelar</a>
+    </div>
 </form>
 {% endblock %}

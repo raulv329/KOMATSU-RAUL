@@ -1,52 +1,33 @@
 {% extends 'base.html' %}
-
 {% block content %}
-    <div class="max-w-lg mx-auto mt-8 p-6 bg-white rounded-lg shadow-md">
-        <h1 class="text-3xl font-semibold text-center text-gray-800 mb-6">Editar Veículo</h1>
-        
-        <form method="POST">
-            <!-- Marca -->
-            <div class="mb-4">
-                <label for="marca" class="block text-gray-700 text-sm font-semibold mb-2">Marca</label>
-                <input type="text" id="marca" name="marca" value="{{ veiculo['Marca'] }}" 
-                       class="w-full px-4 py-2 border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-400" required>
-            </div>
-            
-            <!-- Modelo -->
-            <div class="mb-4">
-                <label for="modelo" class="block text-gray-700 text-sm font-semibold mb-2">Modelo</label>
-                <input type="text" id="modelo" name="modelo" value="{{ veiculo['Modelo'] }}" 
-                       class="w-full px-4 py-2 border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-400" required>
-            </div>
-            
-            <!-- Ano -->
-            <div class="mb-4">
-                <label for="ano" class="block text-gray-700 text-sm font-semibold mb-2">Ano</label>
-                <input type="number" id="ano" name="ano" value="{{ veiculo['Ano'] }}" 
-                       class="w-full px-4 py-2 border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-400" required>
-            </div>
-            
-            <!-- Cor -->
-            <div class="mb-4">
-                <label for="cor" class="block text-gray-700 text-sm font-semibold mb-2">Cor</label>
-                <input type="text" id="cor" name="cor" value="{{ veiculo['Cor'] }}" 
-                       class="w-full px-4 py-2 border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-400">
-            </div>
-            
-            <!-- Preço -->
-            <div class="mb-4">
-                <label for="preco" class="block text-gray-700 text-sm font-semibold mb-2">Preço</label>
-                <input type="number" id="preco" name="preco" value="{{ veiculo['Preco'] }}" 
-                       class="w-full px-4 py-2 border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-400" required>
-            </div>
-
-            <!-- Botão de Submissão -->
-            <div class="flex justify-center">
-                <button type="submit" 
-                        class="px-6 py-2 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500">
-                    Salvar Alterações
-                </button>
-            </div>
-        </form>
+<h1 class="text-2xl font-bold mb-6">Editar Veículo</h1>
+<form method="post" class="bg-white shadow-md rounded-lg p-6">
+    <div class="mb-4">
+        <label for="marca" class="block text-gray-700 text-sm font-medium mb-2">Marca:</label>
+        <input type="text" name="marca" id="marca" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400" value="{{ veiculo.Marca }}" required>
     </div>
+    <div class="mb-4">
+        <label for="modelo" class="block text-gray-700 text-sm font-medium mb-2">Modelo:</label>
+        <input type="text" name="modelo" id="modelo" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400" value="{{ veiculo.Modelo }}" required>
+    </div>
+    <div class="mb-4">
+        <label for="ano" class="block text-gray-700 text-sm font-medium mb-2">Ano:</label>
+        <input type="text" name="ano" id="ano" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400" value="{{ veiculo.Ano }}" required>
+    </div>
+    <div class="mb-4">
+        <label for="placa" class="block text-gray-700 text-sm font-medium mb-2">Placa:</label>
+        <input type="text" name="placa" id="placa" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400" value="{{ veiculo.Placa }}" required>
+    </div>
+    <div class="mb-4">
+        <label for="status" class="block text-gray-700 text-sm font-medium mb-2">Status:</label>
+        <select name="status" id="status" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400">
+            <option value="Ativo" {% if veiculo.Status == 'Ativo' %}selected{% endif %}>Ativo</option>
+            <option value="Inativo" {% if veiculo.Status == 'Inativo' %}selected{% endif %}>Inativo</option>
+        </select>
+    </div>
+    <div class="flex items-center justify-between">
+        <button type="submit" class="bg-green-500 text-white font-medium py-2 px-4 rounded-lg hover:bg-green-600 transition duration-300">Salvar</button>
+        <a href="/veiculos" class="bg-gray-300 text-gray-700 font-medium py-2 px-4 rounded-lg hover:bg-gray-400 transition duration-300">Cancelar</a>
+    </div>
+</form>
 {% endblock %}
